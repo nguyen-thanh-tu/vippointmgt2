@@ -1,0 +1,12 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="banner" resource="default" engine="innodb" comment="Banner Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="varchar" name="image" length="255" nullable="false" default="" comment="Image"/>
+        <column xsi:type="varchar" name="link" length="255" nullable="false" default="" comment="Link image"/>
+        <column xsi:type="smallint" name="sort_order" padding="6" unsigned="true" nullable="false" identity="false" default="0" comment="Sort Order"/>
+        <column xsi:type="boolean" name="status" nullable="false" default="false" comment="Status"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

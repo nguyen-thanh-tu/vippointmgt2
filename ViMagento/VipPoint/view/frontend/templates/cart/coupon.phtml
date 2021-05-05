@@ -1,0 +1,105 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \Magento\Framework\View\Element\AbstractBlock $block
+ */
+
+// We should use strlen function because coupon code could be "0", converted to bool will lead to false
+$hasCouponCode = (bool) strlen($block->getCouponCode());
+$VipPointValue = $block->getQuote()->getData('vip_point');
+$Subtotal_with_vip_point = $block->getQuote()->getData('subtotal_with_vip_point');
+$hasVipPoint = (bool) strlen($VipPointValue);
+?>
+<div class="block discount"
+     id="block-discount"
+     data-mage-init='{"collapsible":{"active": <?= $hasCouponCode ? 'true' : 'false' ?>, "openedState": "active", "saveState": false}}'
+>
+    <div class="title" data-role="title">
+        <strong id="block-discount-heading" role="heading" aria-level="2"><?= $block->escapeHtml(__('Apply Discount')) ?></strong>
+    </div>
+    <div class="content" data-role="content" aria-labelledby="block-discount-heading">
+        <form id="discount-coupon-form"
+              action="<?= $block->escapeUrl($block->getUrl('checkout/cart/couponPost')) ?>"
+              method="post"
+              data-mage-init='{"discountCode":{"couponCodeSelector": "#coupon_code",
+                                               "removeCouponSelector": "#remove-coupon",
+                                               "applyButton": "button.action.apply",
+                                               "cancelButton": "button.action.cancel"}}'>
+            <div class="fieldset coupon<?= $hasCouponCode ? ' applied' : '' ?>">
+                <input type="hidden" name="remove" id="remove-coupon" value="0" />
+                <div class="field">
+                    <label for="coupon_code" class="label"><span><?= $block->escapeHtml(__('Enter discount code')) ?></span></label>
+                    <div class="control">
+                        <input type="text"
+                               class="input-text"
+                               id="coupon_code"
+                               name="coupon_code"
+                               value="<?= $block->escapeHtmlAttr($block->getCouponCode()) ?>"
+                               placeholder="<?= $block->escapeHtmlAttr(__('Enter discount code')) ?>"
+                            <?php if ($hasCouponCode || ($VipPointValue != 0)) :?>
+                                disabled="disabled"
+                            <?php endif; ?>
+                        />
+                    </div>
+                </div>
+                <div class="actions-toolbar">
+                    <?php if (!$hasCouponCode && !$hasVipPoint) :?>
+                        <div class="primary">
+                            <button class="action apply primary" type="button" value="<?= $block->escapeHtmlAttr(__('Apply Discount')) ?>">
+                                <span><?= $block->escapeHtml(__('Apply Discount')) ?></span>
+                            </button>
+                        </div>
+                    <?php elseif($hasCouponCode) :?>
+                        <div class="primary">
+                            <button  type="button" class="action cancel primary" value="<?= $block->escapeHtmlAttr(__('Cancel Coupon')) ?>"><span><?= $block->escapeHtml(__('Cancel Coupon')) ?></span></button>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php if (!$hasCouponCode) : ?>
+                <?= /* @noEscape */ $block->getChildHtml('captcha') ?>
+            <?php endif; ?>
+        </form>
+    </div>
+    <?php if($block->getQuote()->getData('customer_is_guest') == 0) :?>
+    <div class="content" data-role="content" aria-labelledby="block-discount-heading">
+        <form id="vip-point-form"
+              action="<?= $block->escapeUrl($block->getUrl('vippoint/cart/vippointpost')) ?>"
+              method="post"
+             >
+            <div class="fieldset coupon<?= $hasCouponCode ? ' applied' : '' ?>">
+                <input type="hidden" name="remove" id="remove-vippoint" value="0" />
+                <input type="hidden" id="base_total_vippoint" value="<?= $block->escapeHtmlAttr($Subtotal_with_vip_point) ?>" />
+                <div class="field">
+                    <label for="vip_point" class="label"><span><?= $block->escapeHtml(__('Enter Vip Point')) ?></span></label>
+                    <div class="control">
+                        <input type="text"
+                               class="input-text"
+                               id="vip_point"
+                               name="vip_point"
+                               value="<?= $block->escapeHtmlAttr($VipPointValue) ?>"
+                               placeholder="<?= $block->escapeHtmlAttr(__('Enter Vip Point')) ?>"
+                            <?php if ($hasCouponCode) :?>
+                                disabled="disabled"
+                            <?php endif; ?>
+                        />
+                    </div>
+                </div>
+                <div class="actions-toolbar">
+                    <?php if (!$hasCouponCode) :?>
+                        <div class="primary">
+                            <button class="action apply_vippoint primary" type="submit" value="<?= $block->escapeHtmlAttr(__('Apply VipPoint')) ?>">
+                                <span><?= $block->escapeHtml(__('Apply VipPoint')) ?></span>
+                            </button>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </form>
+    </div>
+    <?php endif; ?>
+</div>

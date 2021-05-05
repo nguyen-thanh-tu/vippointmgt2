@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="checkout_cart_item_renderers"/>
+    <body>
+        <referenceContainer name="checkout.cart.totals.container" as="totals" label="Shopping Cart Totals">
+            <block class="Magento\Checkout\Block\Cart\Totals" name="checkout.cart.totals" template="Magento_Checkout::cart/totals.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="block-totals" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Checkout/js/view/cart/totals</item>
+                                <item name="displayArea" xsi:type="string">totals</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="template" xsi:type="string">Magento_Checkout/cart/totals</item>
+                                </item>
+                                <item name="children" xsi:type="array">
+                                    <!-- sort order for this totals is configured on admin panel-->
+                                    <!-- Stores->Configuration->SALES->Sales->General->Checkout Totals Sort Order -->
+                                    <item name="subtotal" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magento_Checkout/js/view/summary/subtotal</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="title" xsi:type="string" translate="true">Subtotal</item>
+                                            <item name="template" xsi:type="string">Magento_Checkout/cart/totals/subtotal</item>
+                                        </item>
+                                    </item>
+                                    <item name="discount" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magento_SalesRule/js/view/cart/totals/discount</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="title" xsi:type="string" translate="true">Discount</item>
+                                            <item name="template" xsi:type="string">Magento_SalesRule/cart/totals/discount</item>
+                                        </item>
+                                    </item>
+                                    <item name="vippoint" xsi:type="array">
+                                        <item name="component" xsi:type="string">ViMagento_VipPoint/js/view/checkout/cart/totals/vippoint</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="title" xsi:type="string" translate="true">VipPoint</item>
+                                            <item name="template" xsi:type="string">ViMagento_VipPoint/checkout/cart/totals/vippoint</item>
+                                        </item>
+                                    </item>
+                                    <item name="shipping" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magento_Checkout/js/view/cart/totals/shipping</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="title" xsi:type="string" translate="true">Shipping</item>
+                                            <item name="template" xsi:type="string">Magento_Checkout/cart/totals/shipping</item>
+                                        </item>
+                                    </item>
+                                    <item name="tax" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magento_Tax/js/view/checkout/cart/totals/tax</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="title" xsi:type="string" translate="true">Tax</item>
+                                            <item name="template" xsi:type="string">Magento_Tax/checkout/cart/totals/tax</item>
+                                        </item>
+                                    </item>
+                                    <item name="weee" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magento_Weee/js/view/cart/totals/weee</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="title" xsi:type="string" translate="true">FPT</item>
+                                            <item name="template" xsi:type="string">Magento_Weee/checkout/summary/weee</item>
+                                        </item>
+                                    </item>
+                                    <item name="vertex-messages" xsi:type="array">
+                                        <item name="component" xsi:type="string">Vertex_Tax/js/view/checkout/summary/tax-messages</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="title" xsi:type="string" translate="true">Vertex Messages</item>
+                                            <item name="template" xsi:type="string">Vertex_Tax/checkout/cart/totals/tax-messages</item>
+                                        </item>
+                                    </item>
+                                    <item name="grand-total" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magento_Checkout/js/view/summary/grand-total</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="title" xsi:type="string" translate="true">Order Total</item>
+                                            <item name="template" xsi:type="string">Magento_Checkout/cart/totals/grand-total</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceBlock class="Magento\Checkout\Block\Cart\Coupon" name="checkout.cart.coupon" as="coupon" template="ViMagento_VipPoint::cart/coupon.phtml"/>
+    </body>
+</page>

@@ -1,0 +1,7 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu >
+        <add id="ViMagento_Banner::banner_manager" title="Banner Manager" module="ViMagento_Banner" resource="ViMagento_Banner::banner_manager" sortOrder="10"/>
+        <add id="ViMagento_Banner::list_banner" title="List Banners" module="ViMagento_Banner" action="banner" resource="ViMagento_Banner::banner_manager" parent="ViMagento_Banner::banner_manager"/>
+        <add id="ViMagento_Banner::new_banner" title="New Banner" module="ViMagento_Banner" action="banner/index/new" resource="ViMagento_Banner::save" parent="ViMagento_Banner::banner_manager"/>
+    </menu>
+</config>

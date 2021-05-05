@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="vippoint" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>VipPoint</label>
+            <tab>sales</tab>
+            <resource>ViMagento_VipPoint::config_vippoint</resource>
+            <group id="vip_point" translate="label" type="text" sortOrder="150" showInDefault="1">
+                <label>Vip Point</label>
+                <field id="vip_point_value" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Coefficient %</label>
+                    <backend_model>ViMagento\VipPoint\Model\Config\Backend\Validate</backend_model>
+                    <comment>Calculated by % of customer orders</comment>
+                </field>
+                <field id="exchange_rate" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Exchange rate</label>
+                    <backend_model>ViMagento\VipPoint\Model\Config\Backend\ValidateEchangeRate</backend_model>
+                    <comment>Calculated by Currncy/VipPoint</comment>
+                </field>
+                <field id="limited_use" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Limited use</label>
+                    <backend_model>ViMagento\VipPoint\Model\Config\Backend\ValidateLimitedUse</backend_model>
+                    <comment>Limit customers to use Vippoint as a coupon code</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

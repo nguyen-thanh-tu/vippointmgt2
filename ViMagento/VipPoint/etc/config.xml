@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <vippoint>
+            <vip_point>
+                <vip_point_value>0</vip_point_value>
+                <exchange_rate>0.1</exchange_rate>
+                <limited_use>100</limited_use>
+            </vip_point>
+        </vippoint>
+    </default>
+</config>

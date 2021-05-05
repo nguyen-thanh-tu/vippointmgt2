@@ -1,0 +1,16 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:DataObject/etc/fieldset.xsd">
+    <scope id="global">
+        <fieldset id="sales_convert_quote">
+            <field name="vip_point">
+                <aspect name="to_order" targetField="vip_point"/>
+            </field>
+            <field name="subtotal_with_vip_point">
+                <aspect name="to_order" targetField="subtotal_with_vip_point"/>
+            </field>
+            <field name="base_subtotal_with_vip_point">
+                <aspect name="to_order" targetField="base_subtotal_with_vip_point"/>
+            </field>
+        </fieldset>
+    </scope>
+</config>
